@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="tabNav('templates')">
+    <div class="mainCon">
+        <!-- <div> -->
+        <div class="df pf">
+            <h1 class="headings" style="margin: 20px 0;text-align: center;" onclick="tabNav('templates')">Templates</h1>
+            <h1 class="headings" style="margin: 20px 0;text-align: center;" onclick="tabNav('social-media-posters')">Social media poster</h1>
+            <h1 class="headings" style="margin: 20px 0;text-align: center;" onclick="tabNav('colaterals')">Colaterals</h1>
+            <h1 class="headings" style="margin: 20px 0;text-align: center;" onclick="tabNav('logo')">Logos</h1>
+            <h1 class="headings" style="margin: 20px 0;text-align: center;" onclick="tabNav('products')">Products Design</h1> <!--to add new -->
+            <h1 class="headings" style="margin: 20px 0;text-align: center;" onclick="tabNav('artwork')">Art work</h1> <!--to add new -->
+            <h1 class="headings" style="margin: 20px 0;text-align: center;" onclick="tabNav('other-work')">Other works</h1>
+            <!-- <h1 class="headings" style="margin: 20px 0;text-align: center;" onclick="tabNav('other-work')">Other works</h1> -->
+        </div>
+        <hr class="divider">
+            <div id="imgContTemplates" class="df"></div>
+            <div id="imgContSocial-media-posters" class="df"></div>
+            <div id="imgContColaterals" class="df"></div>
+            <div id="imgContLogo" class="df"></div>
+            <div id="imgContProducts" class="df"></div><!--to add new give 1st letter caps after imgCont -->
+            <div id="imgContArtwork" class="df"></div><!--to add new give 1st letter caps after imgCont -->
+            <div id="imgContOther-work" class="df"></div>
+        <!-- </div> -->
+    </div>
+
+    <script>
+        function tabNav(val) {
+            // Clear existing images in both containers
+            clearImages("imgContTemplates");
+            clearImages("imgContSocial-media-posters");
+            clearImages("imgContColaterals");
+            clearImages("imgContLogo");
+            clearImages("imgContProducts"); //<!--to add new -->
+            clearImages("imgContArtwork"); //<!--to add new -->
+            clearImages("imgContOther-work");
+
+            // Add new images based on the selected tab
+            var imgContainer = document.getElementById(`imgCont${capitalizeFirstLetter(val)}`);
+            console.log(`imgCont${capitalizeFirstLetter(val)}`);
+            for (let i = 1; i < 15; i++) {
+                try {
+                var imgContainerpar = document.createElement("div"); // Create a new parent div
+                    imgContainerpar.classList.add("image-container"); // Optional: Add a class for styling
+                    var imgElement = document.createElement("img");
+                    imgElement.setAttribute("src", `./${val}/1(${i}).jpg`);
+
+                    imgElement.addEventListener("click", function() {
+                        openInNewTab(`./${val}/1(${i}).jpg`);
+                    });
+                    imgContainer.appendChild(imgContainerpar);
+                    imgContainerpar.appendChild(imgElement);
+                    imgElement.onerror = function() {
+                        this.parentElement.remove()
+                    };
+                }
+                catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+
+        function openInNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+
+        function clearImages(containerId) {
+            var imgContainer = document.getElementById(containerId);
+            imgContainer.innerHTML = '';
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    </script>
+
+    <style>
+        body {
+            overflow-y: auto;
+            background: #e5e5e5;
+        }
+        .mainCon{
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 15px;
+        }
+        .df{
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        #imgContTemplates img {
+            width: 100%;
+            max-width: 430px;
+            cursor: pointer;
+        }
+        .headings {
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 300;
+            padding: 5px 30px;
+            background: #e5e5e5;
+            border-radius: 8px;
+            box-shadow: 0 0 5px #838383;
+        }
+        #imgContSocial-media-posters img {
+            width: 100%;
+            max-width: 250px;
+        }
+        #imgContColaterals img {
+            width: 100%;
+            max-width: 250px;
+        }
+        #imgContLogo img {
+            width: 100%;
+            max-width: 150px;
+        }
+        #imgContOther-work img {
+            width: 100%;
+            max-width: 250px;
+        }
+        img {
+            box-shadow: 0 0 5px #838383;
+        }
+        .pf{
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            background-color: #fff;
+            box-shadow: 0 0 5px #838383;
+        }
+        .divider {
+            width: 100%;
+            max-width: 100px;
+            height: 3px;
+            margin: 70px auto 20px;
+        }
+        #imgContTemplates .image-container{
+            height: 1400px;
+            overflow: hidden;
+        }
+    </style>
+</body>
+</html>
